@@ -19,7 +19,8 @@
 
 				case 4:
 						echo '<h3>Відповідь на завдання '.$task.'</h3>';
-						print_r($_POST);
+//						print_r($_POST);
+						task4 ($_POST);
 					break;				
 
 				case 5:
@@ -88,7 +89,6 @@ function task3 ($numbers) {
 		for ($j=2; $j < $numbers[$i]; $j++) { 
 			if ($numbers[$i]%$j==0) {
 				$chek=1;
-				//break;
 			}
 		}
 		if (($chek==0) and ($numbers[$i]>1)) {
@@ -99,4 +99,40 @@ function task3 ($numbers) {
 	echo '</br>Всього, простих чисел: '.$num_count;
 	return $num_count;
 }
+
+function task4 ($data) {
+	if (isset($data['party'])) {
+		$days=(int) $data['days'];
+		for ($i=1; $i <= $days; $i++) { $days_arr[$i]=0;	}
+		$parties=(int) $data['parties'];
+		$schedule=array_values($data['party']);
+		for ($i=0; $i < count($schedule); $i++) { 
+			$schedule[$i]=explode(' ', $schedule[$i]);
+		} 
+		
+		for ($i=1; $i <= count($days_arr); $i++) { 
+			for ($j=0; $j < count($schedule); $j++) { 
+				for ($k=0; $k < count($schedule[$j]); $k++) { 
+					if (($i==(int) $schedule[$j][''.$k]) && ($i % 7 <> 0) &&  (($i + 1) % 7)) {
+						++$days_arr[$i];
+					}
+				}
+			}
+		}
+
+		echo '<p>Загальнонаціональні страйки пройдуть в такі дні:</p>';
+		$sum=0;
+		for ($i=1; $i <= count($days_arr); $i++) { 
+			if ($days_arr[$i] > 1) {
+				echo '<h3 style="display:inline-block;">';
+				echo ' '.$i;
+				echo '</h3>';
+			}
+			$sum = $sum + $days_arr[$i];
+		}
+		echo '<p>Всього страйків на протязі року: <h3 style="display:inline-block;">'.$sum.'</h3></p>';
+	}
+	return $data;
+}
+
 ?>

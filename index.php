@@ -18,11 +18,11 @@
   <script type="text/javascript">
 
     function AjaxFormRequest(result_id,form_id,url) {
-      jQuery.ajax({
+      $.ajax({
       url:       url, 
       type:     "POST",
       dataType: "html",
-      data: jQuery("#"+form_id).serialize(), 
+      data: $("#"+form_id).serialize(), 
       success: function(response) {
           document.getElementById(result_id).innerHTML = response;
         },
@@ -32,7 +32,7 @@
       });
     }
     
-    var partElem = '<input type="text" size="100" name="party"></br>';
+//    var partElem = '<input type="text" size="100" name="party[]"></br>';
 
   	$(document).ready(function(){
 
@@ -44,7 +44,7 @@
 
     	$('#part-input').keyup(function(){
     		for (var i = 1; (i <= Number($('#part-input').val())) ; i++) {
-    			$('#part-count').append('</br>Графіки проведення страйків Партіі № ' + i + ' ' + '<input type="text" size="100" name="party'+i+'"></br>');
+    			$('#part-count').append('</br>Графіки проведення страйків Партіі № ' + i + ' ' + '<input type="text" size="100" name="party['+i+']'+i+'"></br>');
     		};
     	});
 
